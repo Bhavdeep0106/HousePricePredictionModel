@@ -28,3 +28,6 @@ def predict():
     prediction = pipe.predict(Enter)[0] * 1e5
 
     return str(np.round(prediction,2))
+
+if __name__ == "__main__":
+    app.run(debug=True, port=5001)
