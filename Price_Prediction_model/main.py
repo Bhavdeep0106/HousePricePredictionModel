@@ -4,8 +4,9 @@ from flask import Flask, render_template, request
 import pickle
 import numpy as np
 
+file_path = 'Price_Prediction_model\DataSet\Cleaned_data.csv'
 app = Flask(__name__)
-data = pd.read_csv('Cleaned_data.csv')
+data = pd.read_csv(file_path)
 pipe = pickle.load(open("RidgeModel.pkl", 'rb'))
 
 
@@ -23,8 +24,8 @@ def predict():
     sqft = request.form.get('total_sqft')
 
     print(location, bhk, bath, sqft)
-    input = pd.DataFrame([[location, sqft, bath, bhk]], columns=['location', 'total_sqft', 'bath', 'bhk'])
-    prediction = pipe.predict(input)[0] * 1e5
+    Enter = pd.DataFrame([[location, sqft, bath, bhk]], columns=['location', 'total_sqft', 'bath', 'bhk'])
+    prediction = pipe.predict(Enter)[0] * 1e5
 
     return str(np.round(prediction,2))
 
